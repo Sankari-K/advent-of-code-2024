@@ -1,0 +1,3 @@
+# Ignore all files named puzzle_input.txt (actual input) or input.txt (sample input) in any directory
+**/puzzle_input.txt
+**/input.txt
