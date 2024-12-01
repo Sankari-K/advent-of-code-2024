@@ -1,5 +1,3 @@
-from collections import Counter
-
 def get_puzzle_input(directory):
     with open(directory) as f:
         lines = f.readlines()
@@ -12,8 +10,7 @@ def find_list_distance(input):
 
 def find_similarity_score(input):
     left, right = zip(*input)
-    right = Counter(right)
-    return sum([l * right[l] for l in left])
+    return sum([l * right.count(l) for l in left])
 
 # part a
 puzzle_input = get_puzzle_input(r"./puzzle_input.txt")
