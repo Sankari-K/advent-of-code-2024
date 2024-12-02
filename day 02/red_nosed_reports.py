@@ -5,11 +5,7 @@ def get_puzzle_input(directory):
     return [list(map(int, line.strip().split())) for line in lines]
 
 def check_increasing(report):
-    for index, item in enumerate(report[1:], start=1):
-        prev = report[index - 1]
-        if item - prev not in [1, 2, 3]:
-            return False
-    return True
+    return all(map(lambda x: x[1] - x[0] in [1, 2, 3], zip(report, report[1:]))) # x = (prev_level, level)
 
 def check_increasing_with_dampener(report):
     return any([check_increasing(report[:index] + report[index + 1:]) for index in range(len(report))])
