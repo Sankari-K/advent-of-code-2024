@@ -12,8 +12,7 @@ def check_increasing_with_dampener(report):
 
 def find_safe_reports(reports, dampening=False):
     check = check_increasing_with_dampener if dampening else check_increasing 
-    reports = list(map(lambda x: x if x[0] < x[-1] else x[::-1], reports))
-    return sum(map(check, reports))
+    return sum(map(lambda x: check(x) or check(x[::-1]), reports))
 
 puzzle_input = get_puzzle_input(r"./puzzle_input.txt")
 
