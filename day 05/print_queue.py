@@ -23,7 +23,7 @@ def check_ordering(rules, update): # check if update is correctly ordered or not
                 return False
     return True
 
-def reorder_update(rules, update):
+def reorder_update(rules, update): # another way would be to use sort() with a custom comparator like return rules[a].contains(b)
     while not check_ordering(rules, update):
         for next in update:
             for element in rules[next].intersection(update[update.index(next) + 1:]):
