@@ -27,7 +27,7 @@ def traverse_map(current_position, obstacles):
     return seen
 
 def find_loop(X_LIMIT, Y_LIMIT, current_position, obstacles):
-    seen = set()
+    seen = dict()
     current_dir = -1
 
     while current_position.real not in [-1, X_LIMIT] and current_position.imag not in [-1, Y_LIMIT]:
@@ -37,10 +37,10 @@ def find_loop(X_LIMIT, Y_LIMIT, current_position, obstacles):
             next_position = current_position + current_dir
 
         current_position = next_position
-        if (current_dir, current_position) in seen:
+        if current_position in seen and seen[current_position] == current_dir:
             return True
         
-        seen.add((current_dir, current_position))
+        seen[current_position] = current_dir
 
     return False
 
