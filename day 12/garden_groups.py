@@ -63,7 +63,7 @@ def get_sides(region):
         above = y - 1
         below = y + 1
         right_not_in_region = (right, y) not in region
-        below_not_region = (x, below) not in region
+        below_not_in_region = (x, below) not in region
 
         if (x, above) not in region:
             if right_not_in_region or (right, above) in region:
@@ -74,11 +74,11 @@ def get_sides(region):
                 down_sides += 1
 
         if (left, y) not in region:
-            if below_not_region or (left, below) in region:
+            if below_not_in_region or (left, below) in region:
                 left_sides += 1
 
         if (right, y) not in region:
-            if below_not_region or (right, below) in region:
+            if below_not_in_region or (right, below) in region:
                 right_sides += 1
 
     return up_sides + down_sides + left_sides + right_sides
