@@ -11,8 +11,8 @@ def get_puzzle_input(directory):
             GARDEN[(x, y)] = col
     return len(file), len(file[0]), GARDEN
 
-def get_details(x, y, cycle):
-    if (x, y) in cycle or (x, y) in SEEN:
+def get_details(x, y):
+    if (x, y) in SEEN:
         return 0, 0, []
     if (x, y) not in GARDEN:
         return 0, 0, []
@@ -25,19 +25,17 @@ def get_details(x, y, cycle):
         perimeter += 1
 
     points = [(x, y)]
-    cycle.add((x, y))
+    SEEN.add((x, y))
     for dx, dy in DIRECTIONS:
         newx, newy = x + dx, y + dy
         if (newx, newy) in GARDEN and GARDEN[(x, y)] != GARDEN[(newx, newy)]:
             perimeter += 1
         else:
-            extraarea, extraperimeter, extrapoints =  get_details(newx, newy, cycle)
+            extraarea, extraperimeter, extrapoints =  get_details(newx, newy)
             area += extraarea
             perimeter += extraperimeter
             points += extrapoints
 
-    SEEN.add((x, y))
-    cycle.remove((x, y))
     return area, perimeter, points
      
 def get_fencing_price():
@@ -45,7 +43,7 @@ def get_fencing_price():
     for x in range(X_LIMIT):
         for y in range(Y_LIMIT):
             if (x, y) not in SEEN:
-                area, perimeter, points = get_details(x, y, set())
+                area, perimeter, points = get_details(x, y)
                 price += area * perimeter
                 discount_price += area * get_sides(points)
                 SEEN.add((x, y))
